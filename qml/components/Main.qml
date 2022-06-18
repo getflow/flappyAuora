@@ -1,4 +1,4 @@
-import QtQuick 1.1
+import QtQuick 2.0
 
 Rectangle {
     id: game
@@ -6,18 +6,16 @@ Rectangle {
     property bool initialized: false
     property alias bird: bird
 
-    width: 288
-    height: 511
-
-    focus: true
-
     signal birdPositionChanged
     signal gameOver
     signal destroyPipes
 
+    focus: true
+
     function terminateGame() {
         initialized = false
 
+        flapArea.enabled = false
         game.gameOver()
 
         backgroundAnim.stop()
@@ -27,7 +25,8 @@ Rectangle {
 
         gravity.interval = 6
 
-//        gameOverAnim.start();
+        gameOverAnim.start();
+        gravity.stop()
 
         score.opacity = 0;
     }
@@ -70,7 +69,7 @@ Rectangle {
 
             var font = component.createObject(finalScore)
             font.setSize(12, 14);
-            font.setFileName("sprites/fontmini.png");
+            font.setFileName(Qt.resolvedUrl("../sprites/fontmini.png"));
             font.setIndex(value)
         } else {
             var n1 = parseInt(value / 10)
@@ -80,11 +79,11 @@ Rectangle {
 
             var f1 = component.createObject(finalScore)
             f1.setSize(12, 14);
-            f1.setFileName("sprites/fontmini.png");
+            f1.setFileName(Qt.resolvedUrl("../sprites/fontmini.png"));
             f1.setIndex(n1)
             var f2 = component.createObject(finalScore)
             f2.setSize(12, 14);
-            f2.setFileName("sprites/fontmini.png");
+            f2.setFileName(Qt.resolvedUrl("../sprites/fontmini.png"));
             f2.setIndex(n2)
             f2.x = 12
         }
@@ -122,9 +121,9 @@ Rectangle {
 
     Image {
         id: background
-        source: "sprites/bg.png"
-        width: 288
-        height: 511
+        source: Qt.resolvedUrl("../sprites/bg.png")
+        width: parent.width
+        height: parent.height
         fillMode: Image.TileHorizontally
 
         Timer {
@@ -140,6 +139,7 @@ Rectangle {
         }
 
         MouseArea {
+            id: flapArea
             anchors.fill: parent
             onClicked: flappy()
         }
@@ -147,8 +147,8 @@ Rectangle {
 
     Image {
         id: ground
-        source: "sprites/ground.png"
-        width: 288
+        source: Qt.resolvedUrl("../sprites/ground.png")
+        width: parent.width
         height: 112
         y: parent.height - height
         fillMode: Image.TileHorizontally
@@ -158,9 +158,10 @@ Rectangle {
 
             onBirdPositionChanged: {
                 if (game.bird.y + game.bird.height >= ground.y) {
-                    if (game.initialized) game.terminateGame()
-                    gravity.stop()
-                    gameOverAnim.start();
+                    if (game.initialized)
+                        game.terminateGame()
+//                        gravity.stop()
+//                        gameOverAnim.start();
                 }
             }
         }
@@ -181,21 +182,21 @@ Rectangle {
     Image {
         id: ready
         anchors.horizontalCenter: parent.horizontalCenter
-        source: "sprites/getready.png"
+        source: Qt.resolvedUrl("../sprites/getready.png")
         y: 60
     }
 
     Image {
         id: tap
         anchors.horizontalCenter: parent.horizontalCenter
-        source: "sprites/tap.png"
+        source: Qt.resolvedUrl("../sprites/tapAurora.png")
         y: 150
     }
 
     Image {
         id: gameOverSplash
         anchors.horizontalCenter: parent.horizontalCenter
-        source: "sprites/gameover.png"
+        source: Qt.resolvedUrl("../sprites/gameover.png")
         height: 44
         y: -height
         z: 2
@@ -215,14 +216,13 @@ Rectangle {
                     console.log(score.count);
                     setFinalScore(score.count);
                 }
-//
             }
         }
     }
 
     Image {
         id: medalsTable
-        source: "sprites/medalstable.png"
+        source: Qt.resolvedUrl("../sprites/medalstable.png")
         anchors.top: gameOverSplash.bottom
         anchors.topMargin: 20
         anchors.horizontalCenter: parent.horizontalCenter
@@ -230,7 +230,7 @@ Rectangle {
         opacity: 0
 
         Image {
-//            source: "bronzemedal.png"
+            source: Qt.resolvedUrl("../sprites/bronzemedal.png")
             x: 24
             y: 42
         }
@@ -246,7 +246,7 @@ Rectangle {
 
     Image {
         id: playAgain
-        source: "sprites/playagain.png"
+        source: Qt.resolvedUrl("../sprites/playagain.png")
         anchors.top: medalsTable.bottom
         anchors.topMargin: 20
         anchors.horizontalCenter: parent.horizontalCenter
@@ -272,6 +272,7 @@ Rectangle {
                 bird.rotation = 0;
 
                 gravity.interval = 9;
+                flapArea.enabled = true
             }
         }
     }
@@ -291,9 +292,9 @@ Rectangle {
     Image {
         id: bird
         rotation: 0
-        source: "sprites/bird.png"
+        source: Qt.resolvedUrl("../sprites/aurora.png")
         width: 34
-        height: 24
+        height: 34
         x: (parent.width / 2 - width / 2) - 60
         y: 180
         z: 1

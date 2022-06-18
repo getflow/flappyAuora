@@ -1,4 +1,4 @@
-import QtQuick 1.1
+import QtQuick 2.0
 
  Item {
     id: fonts
@@ -10,7 +10,7 @@ import QtQuick 1.1
 
      Image {
         id: font
-        source: "sprites/font.png"
+        source: Qt.resolvedUrl("../sprites/font.png")
         x: -parent.width * 0
     }
 

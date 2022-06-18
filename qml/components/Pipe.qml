@@ -1,15 +1,15 @@
-import QtQuick 1.1
+import QtQuick 2.0
 
 Item {
     id: pipe
     width: 52
-    height: 399
+    height: parent.height
 
     property bool ignore: false
 
     BorderImage {
       id: up
-      source: "sprites/pipe.png"
+      source: Qt.resolvedUrl("../sprites/pipe.png")
       width: parent.width
       horizontalTileMode: BorderImage.Stretch
       verticalTileMode: BorderImage.Stretch
@@ -18,7 +18,7 @@ Item {
 
     BorderImage {
       id: down
-      source: "sprites/pipe.png"
+      source: Qt.resolvedUrl("../sprites/pipe.png")
       height: 100
       width: parent.width
       y: 299
@@ -38,13 +38,13 @@ Item {
     }
 
     function init() {
-        var w = Math.floor((Math.random()*200)+40);
+        var w = Math.floor((Math.random()*pipe.height/4)+40);
         //up.y -= w;
         up.height = w;
         up.rotation = 180;
 
         down.y = up.height + 120;
-        down.height = 399 - (down.y);
+        down.height = pipe.height - (down.y);
     }
 
     Connections {

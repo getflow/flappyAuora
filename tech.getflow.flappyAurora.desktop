@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+X-Nemo-Application-Type=silica-qt5
+Icon=tech.getflow.flappyAurora
+Exec=/usr/bin/tech.getflow.flappyAurora
+Name=FlappyAurora
+Name[ru]=FlappyAurora
+
+[X-Sailjail]
+Permissions=
+OrganizationName=tech.getflow
+ApplicationName=flappyAurora
+ExecDBus=/usr/bin/tech.getflow.flappyAurora
