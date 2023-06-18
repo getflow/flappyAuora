@@ -46,7 +46,7 @@ CoverBackground {
         objectName: "placeholder"
         text: qsTr("FlappyAurora")
         icon {
-            source: Qt.resolvedUrl("../icons/ApplicationTemplate.svg")
+            source: Qt.resolvedUrl("../icons/flappyAurora.svg")
             sourceSize { width: icon.width; height: icon.height }
         }
         forceFit: true

@@ -8,9 +8,9 @@ Name:       tech.getflow.flappyAurora
 # >> macros
 # << macros
 
-Summary:    FlappyAurora Clone
-Version:    0.1
-Release:    1
+Summary:    FlappyBird Clone
+Version:    0.2
+Release:    10
 Group:      Qt/Qt
 License:    BSD-3-Clause
 URL:        https://getflow.tech/
@@ -25,7 +25,7 @@ BuildRequires:  desktop-file-utils
 BuildRequires:  cmake
 
 %description
-FlappyAurora Clone for Aurora OS
+FlappyBird Clone for Aurora OS
 
 
 %prep

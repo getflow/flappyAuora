@@ -60,6 +60,7 @@ install(FILES icons/172x172/tech.getflow.flappyAurora.png
 
 # Get the other files reachable from the project tree in Qt Creator
 FILE(GLOB TsFiles "translations/*.ts")
+FILE(GLOB_RECURSE Icons "icons/*.png")
 add_custom_target(distfiles
     SOURCES
         AUTHORS.md
@@ -79,7 +80,8 @@ add_custom_target(distfiles
         rpm/tech.getflow.flappyAurora.yaml
         rpm/tech.getflow.flappyAurora.changes.in
         rpm/tech.getflow.flappyAurora.changes.run.in
-        ${TsFiles})
+        ${TsFiles}
+        ${Icons})
 
 file(WRITE "${CMAKE_BINARY_DIR}/QtCreatorDeployment.txt"
     "${CMAKE_INSTALL_PREFIX}
